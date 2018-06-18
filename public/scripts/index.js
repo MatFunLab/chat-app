@@ -5,10 +5,7 @@ socket.on("connect", function () {
 
 });
 
-socket.emit("createMessage",  {
-  to: "jen@email.com",
-  text: "Im Jen"
-});
+
 
 socket.on("newMessage", function (message) {
   console.log(message);
