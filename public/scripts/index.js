@@ -25,3 +25,27 @@ $("#message-form").on("submit", function (e) {
   });
 
 });
+
+let locationButton = $("#send-location");
+let place = $("#place");
+locationButton.on("click", function() {
+  if(!navigator.geolocation) {
+      return alert("Geolocation not supported for your browser");
+  }
+  navigator.geolocation.getCurrentPosition(function(position) {
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
+
+      //fetch address and put it below message form
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}`)
+      .then((res) => {
+        return res.json();  })
+        .then(data => {
+          place.text(data.results[0].formatted_address.toString());
+          console.log(data.results[0].formatted_address);
+        });
+
+  }, function(e) {
+    alert("Unable to fetch position ", e);
+  });
+});
