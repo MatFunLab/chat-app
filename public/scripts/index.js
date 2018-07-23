@@ -6,8 +6,9 @@ socket.on("connect", function () {
 });
 
 socket.on("newMessage", function (message) {
-  let li = $("<li></li>");
-  li.text(`${message.from}: ${message.text}`);
+  let formattedTime = moment(message.createdAt).format("h:mm a");
+  const li = $("<li></li>");
+  li.text(`${message.from}: ${message.text} \xa0\xa0\xa0\xa0 sent.. ${formattedTime}`);
   $("#messages").append(li);
   });
 socket.on("sendLocation", function (location) {

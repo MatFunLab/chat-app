@@ -1,9 +1,10 @@
-const generateMessage = (from, text, location) => {
+const moment = require('moment');
+
+const generateMessage = (from, text) => {
   return {
     from,
     text,
-    location,
-    createdAt: new Date().getTime()
+    createdAt: moment().valueOf()
   }
 };
 
